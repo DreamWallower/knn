@@ -156,7 +156,7 @@ public:
 					result.push_back(distance.back().second);
 					distance.pop_back();
 				}
-				return vote(result);
+				return neighborVote(result);
 			}
 		}
 
@@ -221,7 +221,7 @@ private:
 	 *
 	 * @params { labels }
 	 */
-	type_label vote(vector<type_label>& labels) {
+	type_label neighborVote(vector<type_label>& labels) {
 		unordered_map<type_label, int> voter;
 		type_label label;
 		int count = 0;
