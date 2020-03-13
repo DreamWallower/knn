@@ -26,7 +26,7 @@
 //			string result = knn.classify(test)[1]; /* 1-NN */
 //			string result2 = knn.classify(test)[3]; /* 3-NN */
 //
-//		Or,
+//		Or
 //      	Knn<double, string>& knn = Knn<double, string>::getInstance();
 //			knn.init(data, 3, label, 4);
 //			knn.classify(test);
@@ -41,11 +41,13 @@
 #include <unordered_map>
 #include <utility>
 
+using std::sqrt;
 using std::vector;
 using std::pair;
 using std::unordered_map;
 using std::make_heap;
 using std::sort_heap;
+using std::pop_heap;
 
 
 ////////////////////////////////////////////////////////////////
@@ -81,7 +83,7 @@ namespace KNN {
 			double result = 0;
 			for (int i = m_data.size(); i--; )
 				result += (m_data[i] - test[i]) * (m_data[i] - test[i]);
-			return std::sqrt(result);
+			return sqrt(result);
 		}
 	};
 
@@ -148,10 +150,13 @@ public:
 			}
 			else { // knn
 				vector<type_label> result;
-				make_heap(distance.begin(), distance.end(), m_less);
-				sort_heap(distance.begin(), distance.end(), m_less);
-				for (auto it = distance.begin(); it < distance.begin() + K; ++it)
-					result.push_back((*it).second);
+				result.reserve(K);
+				for (int i = K; i--; ) {
+					make_heap(distance.begin(), distance.end(), m_greater);
+					pop_heap(distance.begin(), distance.end(), m_greater);
+					result.push_back(distance.back().second);
+					distance.pop_back();
+				}
 				return vote(result);
 			}
 		}
