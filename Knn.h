@@ -99,13 +99,13 @@ namespace KNN {
 
 	////////////////////////////////////////////////////////////////
 	// STRUCT TEMPLATE less.
-	template<typename type_label = int>
-	struct KnnLabelLess {
-		using KnnLabelPair = const pair<double, type_label>;
-		constexpr bool operator()(KnnLabelPair& left, KnnLabelPair& right) const {
-			return left.first < right.first;
-		}
-	};
+	//template<typename type_label = int>
+	//struct KnnLabelLess {
+	//	using KnnLabelPair = const pair<double, type_label>;
+	//	constexpr bool operator()(KnnLabelPair& left, KnnLabelPair& right) const {
+	//		return left.first < right.first;
+	//	}
+	//};
 }
 
 ////////////////////////////////////////////////////////////////
@@ -244,6 +244,5 @@ private:
 	vector<KNN::KnnData<type_data, type_label>> m_dataSet;
 	type_data* m_testData;
 	KNN::KnnLabelGreater<type_label> m_greater;
-	KNN::KnnLabelLess<type_label> m_less;
 };
 
