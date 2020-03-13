@@ -46,7 +46,6 @@ using std::vector;
 using std::pair;
 using std::unordered_map;
 using std::make_heap;
-using std::sort_heap;
 using std::pop_heap;
 
 
