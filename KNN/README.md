@@ -21,14 +21,16 @@ The Pattern Recognition Library <Knn.h> header.
 
 For example, here is some data:
 ```c++
-double data[]{ 1, 101, 1, 5, 89, 1, 108, 5, 1, 115, 8, 1 }; 
+vector<double> data{ 1, 101, 5, 89, 108, 5, 115, 8 }; 
 string label[]{ "A", "A", "B", "B" }; 
+unsigned int dim = 2;
+unsigned int size = 4;
 
 ``` 
 
 And here is test data:
 ```c++
-double test[]{ 10, 202, 1 };
+vector<double> test{ 10, 202 };
 ```
 
 </br>
@@ -40,18 +42,20 @@ Then
 ``` 
 
 ```c++
-auto& knn = Knn<double, string>::getInstance(); 
-knn.init(data, 3, label, 4); 
+Knn<double, string> knn;
+knn.init(data, dim, label, size); 
 string result = knn.classify(test)[1]; /* 1-NN */
 string result2 = knn.classify(test)[3]; /* 3-NN */
+cout << result << ',' << result2 << endl;
 ```
 
 Or
 ```c++
-Knn<double, string>& knn = Knn<double, string>::getInstance(); 
-knn.init(data, 3, label, 4); 
+Knn<double, string> knn;
+knn.init(data, dim, label, size); 
 knn.classify(test); 
 string result = knn[1]; /* 1-NN */
 string result2 = knn[3]; /* 3-NN */
+cout << result << ',' << result2 << endl;
 ```
 
