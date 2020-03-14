@@ -29,7 +29,6 @@
 #include <Eigen/SVD>
 #include <vector>
 
-#include <iostream>
 template <typename data_type>
 class Pca {
     using stdVector = std::vector<data_type>;
@@ -51,7 +50,7 @@ public:
     stdVector operator[](const unsigned int K) {
         // Covariance matrix.
         eigenMatrix covariance = (m_dataSet * m_dataSet.transpose()) / (m_dataSet.cols() - 1);
-        std::cout << covariance << std::endl;
+
         // Singular Value Decomposition (SVD).
         eigenJacobiSVD svd(covariance, Eigen::ComputeThinU);
         eigenMatrix U = svd.matrixU();

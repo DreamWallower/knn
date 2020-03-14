@@ -46,7 +46,6 @@ Knn<double, string> knn;
 knn.init(data, dim, label, size); 
 string result = knn.classify(test)[1]; /* 1-NN */
 string result2 = knn.classify(test)[3]; /* 3-NN */
-cout << result << ',' << result2 << endl;
 ```
 
 Or
@@ -56,6 +55,5 @@ knn.init(data, dim, label, size);
 knn.classify(test); 
 string result = knn[1]; /* 1-NN */
 string result2 = knn[3]; /* 3-NN */
-cout << result << ',' << result2 << endl;
 ```
 
