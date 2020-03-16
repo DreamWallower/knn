@@ -48,12 +48,9 @@ public:
      * Used PCA to reduce the data dimension to `K` by using SVD.
      */
     stdVector operator[](const unsigned int K) {
-        // Covariance matrix.
-        eigenMatrix covariance = (m_dataSet * m_dataSet.transpose()) / (m_dataSet.cols() - 1);
-
         // Singular Value Decomposition (SVD).
-        eigenJacobiSVD svd(covariance, Eigen::ComputeThinU);
-        eigenMatrix U = svd.matrixU();
+        eigenJacobiSVD svd(m_dataSet, Eigen::ComputeThinU);
+        eigenMatrix U = svd.matrixU().transpose();
 
         // Result.
         eigenMatrix result = U.block(0, 0, K, U.cols()) * m_dataSet;
