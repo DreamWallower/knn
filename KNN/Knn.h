@@ -54,10 +54,6 @@ struct Data {
 
     /**
 	 * Constructor.
-	 *
-	 * @param { data }     array of data.
-	 * @param { dim }      the range of array.
-	 * @param { label }    the label of this data.
 	 */
     Data(const data_type* data, const unsigned int dim, label_type label) {
         m_data = stdVector(data, data + dim);
@@ -66,8 +62,6 @@ struct Data {
 
     /**
 	 * Calculated Euclidean distance.
-	 *
-	 * @returns    the distance between `test` and `m_data`.
 	 */
     double EuclideanDistance(const data_type* test) {
         double result = 0;
@@ -136,8 +130,6 @@ public:
 
     /**
 	 * Input the data to be classified.
-	 *
-	 * @param { data }     data with unknown label.
 	 */
     Knn<data_type, label_type>& classify(const data_type* data) {
         this->m_testData = data;
@@ -157,11 +149,6 @@ public:
 	 *      +--------+--------+--------+--------
 	 *      \_ dim _/
 	 *
-	 * @param { data }     a cluster of data.
-	 * @param { dim }      dimensions of the data.
-	 * @param { label }    the label of the data.
-	 * @param { size }     the size of data.
-	 *
 	 * @note  `sizeof(data) / sizeof(data_type) == dim * size`
 	 *        `sizeof(label) / sizeof(label_type) == size`
 	 */
@@ -179,8 +166,6 @@ public:
 private:
     /**
 	 * Voted for result by finding the majority labels.
-	 *
-	 * @param { labels }
 	 */
     label_type neighborVote(stdVectorLabel& labels) {
         stdUnorderedMap voter;
