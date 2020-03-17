@@ -31,7 +31,7 @@
 
 template <typename data_type>
 class Pca {
-    using stdVector = std::vector<data_type>;
+    using stdVectorData = std::vector<data_type>;
     using eigenMatrix = Eigen::Matrix<data_type, Eigen::Dynamic, Eigen::Dynamic>;
     using eigenVector = Eigen::Matrix<data_type, Eigen::Dynamic, 1>;
     using eigenMap = Eigen::Map<const eigenMatrix>;
@@ -47,7 +47,7 @@ public:
      * Overloaded the operator `[]`.
      * Used PCA to reduce the data dimension to `K` by using SVD.
      */
-    stdVector operator[](const unsigned int K) {
+    stdVectorData operator[](const unsigned int K) {
         // Singular Value Decomposition (SVD).
         eigenJacobiSVD svd(m_dataSet, Eigen::ComputeThinU);
         eigenMatrix U = svd.matrixU().transpose();
@@ -62,7 +62,7 @@ public:
 
         // Result.
         eigenMatrix result = U.block(0, 0, K, U.cols()) * m_dataSet;
-        return stdVector(result.data(), result.data() + result.size());
+        return stdVectorData(result.data(), result.data() + result.size());
     }
 
     /**
@@ -87,7 +87,7 @@ public:
     /**
      * Loading data, and then centralize.
      */
-    Pca& reduce(const stdVector& data, unsigned int dim, unsigned int size) {
+    Pca& reduce(const stdVectorData& data, unsigned int dim, unsigned int size) {
         return reduce(data.data(), dim, size);
     }
 

@@ -48,15 +48,15 @@ namespace KNN {
 // Data structure for KNN classifier.
 template <typename data_type, typename label_type>
 struct Data {
-    using stdVector = std::vector<data_type>;
-    stdVector m_data;
+    using stdVectorData = std::vector<data_type>;
+    stdVectorData m_data;
     label_type m_label;
 
     /**
 	 * Constructor.
 	 */
     Data(const data_type* data, const unsigned int dim, label_type label) {
-        m_data = stdVector(data, data + dim);
+        m_data = stdVectorData(data, data + dim);
         m_label = label;
     }
 
@@ -86,14 +86,14 @@ struct KnnLabelGreater {
 // KNN classifier.
 template <typename data_type, typename label_type = int>
 class Knn {
-    using stdVectorData = std::vector<data_type>;
-    using stdVectorLabel = std::vector<label_type>;
+    using KnnComparator = KNN::KnnLabelGreater<label_type>;
     using KnnData = KNN::Data<data_type, label_type>;
     using stdVectorKnnData = std::vector<KnnData>;
+    using stdVectorData = std::vector<data_type>;
+    using stdVectorLabel = std::vector<label_type>;
     using stdPair = std::pair<double, label_type>;
     using stdVectorPair = std::vector<stdPair>;
-    using stdUnorderedMap = std::unordered_map<label_type, int>;
-    using KnnComparator = KNN::KnnLabelGreater<label_type>;
+    using stdHashMap = std::unordered_map<label_type, int>;
 
 public:
     Knn() : m_testData(nullptr){};       /* Constructor. */
@@ -153,10 +153,12 @@ public:
 	 *        `sizeof(label) / sizeof(label_type) == size`
 	 */
     void init(const data_type* data, unsigned int dim, const label_type* label, unsigned int size) {
-        m_dataSet.clear();
-        m_dataSet.reserve(size);
-        for (unsigned int i = 0, idx = 0; i < size; ++i, idx += dim)
-            m_dataSet.push_back(KnnData(data + idx, dim, label[i]));
+        if (data && dim && label && size) {
+            m_dataSet.clear();
+            m_dataSet.reserve(size);
+            for (unsigned int i = 0, idx = 0; i < size; ++i, idx += dim)
+                m_dataSet.push_back(KnnData(data + idx, dim, label[i]));
+        }
     }
 
     void init(const stdVectorData& data, unsigned int dim, const stdVectorLabel& label, unsigned int size) {
@@ -168,7 +170,7 @@ private:
 	 * Voted for result by finding the majority labels.
 	 */
     label_type neighborVote(stdVectorLabel& labels) {
-        stdUnorderedMap voter;
+        stdHashMap voter;
         label_type label;
         int count = 0;
         for (auto& res : labels) {
