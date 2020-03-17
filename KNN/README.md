@@ -22,7 +22,7 @@ The Pattern Recognition Library <Knn.h> header.
 For example, here is some data:
 ```c++
 vector<double> data{ 1, 101, 5, 89, 108, 5, 115, 8 }; 
-string label[]{ "A", "A", "B", "B" }; 
+vector<string> label{ "A", "A", "B", "B" };
 unsigned int dim = 2;
 unsigned int size = 4;
 

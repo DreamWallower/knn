@@ -11,7 +11,7 @@
 // How to use:
 //		For example, here is some data:
 //			vector<double> data{ 1, 101, 5, 89, 108, 5, 115, 8 };
-//			string label[]{ "A", "A", "B", "B" };
+//			vector<string> label{ "A", "A", "B", "B" };
 //          unsigned int dim = 2;
 //          unsigned int size = 4;
 //
@@ -159,8 +159,8 @@ public:
             m_dataSet.push_back(KnnData(data + idx, dim, label[i]));
     }
 
-    void init(const stdVectorData& data, unsigned int dim, const label_type* label, unsigned int size) {
-        init(data.data(), dim, label, size);
+    void init(const stdVectorData& data, unsigned int dim, const stdVectorLabel& label, unsigned int size) {
+        init(data.data(), dim, label.data(), size);
     }
 
 private:
