@@ -52,6 +52,14 @@ public:
         eigenJacobiSVD svd(m_dataSet, Eigen::ComputeThinU);
         eigenMatrix U = svd.matrixU().transpose();
 
+        // Adjusts the rows of U that are largest in absolute value are always positive.
+        int cols, rows = U.rows();
+        for (int i = rows; i--;) {
+            U.row(i).cwiseAbs().maxCoeff(&cols);
+            if (U(i, cols) < 0)
+                U.row(i).array() *= -1;
+        }
+
         // Result.
         eigenMatrix result = U.block(0, 0, K, U.cols()) * m_dataSet;
         return stdVector(result.data(), result.data() + result.size());
