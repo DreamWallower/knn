@@ -22,7 +22,7 @@ The Pattern Recognition Library <Knn.h> header.
 For example, here is some data:
 ```c++
 vector<double> data{ 1, 101, 5, 89, 108, 5, 115, 8 }; 
-vector<string> label{ "A", "A", "B", "B" };
+vector<string> labels{ "A", "A", "B", "B" };
 unsigned int dim = 2;
 unsigned int size = 4;
 
@@ -43,7 +43,7 @@ Then
 
 ```c++
 Knn<double, string> knn;
-knn.init(data, dim, label, size); 
+knn.init(data, dim, labels, size); 
 string result = knn.classify(test)[1]; /* 1-NN */
 string result2 = knn.classify(test)[3]; /* 3-NN */
 ```
@@ -51,7 +51,7 @@ string result2 = knn.classify(test)[3]; /* 3-NN */
 Or
 ```c++
 Knn<double, string> knn;
-knn.init(data, dim, label, size); 
+knn.init(data, dim, labels, size); 
 knn.classify(test); 
 string result = knn[1]; /* 1-NN */
 string result2 = knn[3]; /* 3-NN */
