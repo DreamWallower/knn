@@ -4,32 +4,8 @@
 //      Author: Jachin Fang.
 //
 // The Pattern Recognition Library <Knn.h> header.
-// K-nearest-neighbor(kNN) classification is one of the most fundamental and simple classification methods
+// K-nearest-neighbor (kNN) classification is one of the most fundamental and simple classification methods
 // and should be one of the first choices for a classification study  when there is little or no prior knowledge about the distribution of the data.
-//
-//
-// How to use:
-//		For example, here is some data:
-//			vector<double> data{ 1, 101, 5, 89, 108, 5, 115, 8 };
-//			vector<string> label{ "A", "A", "B", "B" };
-//          unsigned int dim = 2;
-//          unsigned int size = 4;
-//
-//		And here is test data:
-//			vector<double> test{ 10, 202 };
-//
-//		Then,
-//      	Knn<double, string> knn;
-//			knn.init(data, dim, label, size);
-//			string result = knn.classify(test)[1]; /* 1-NN */
-//			string result2 = knn.classify(test)[3]; /* 3-NN */
-//
-//		Or,
-//      	Knn<double, string> knn;
-//			knn.init(data, dim, label, size);
-//			knn.classify(test);
-//			string result = knn[1]; /* 1-NN */
-//			string result2 = knn[3]; /* 3-NN */
 //
 #pragma once
 
